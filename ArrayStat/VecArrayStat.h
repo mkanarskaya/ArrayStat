@@ -11,8 +11,10 @@ private:
 	double m_rms;
 public:
 	VecArrayStat(const std::string& fname);
-	int get_max() const;
-	int get_min() const;
+	double get_mean() const;
+	double get_rms() const;
+	std::array <int, 3> get_max() const;
+	std::array <int, 3>  get_min() const;
 	void print() const;
 	size_t countLarger(int) const;
 };

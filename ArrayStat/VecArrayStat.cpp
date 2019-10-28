@@ -43,18 +43,27 @@ VecArrayStat::VecArrayStat(const string& fname) {
 	double mean_sq = accumulate(begin(squares), end(squares), 0.) / squares.size();
 	m_rms = sqrt(mean_sq - m_mean * m_mean);
 }
-int VecArrayStat::get_max() const {
-	return sqrt(squar(data[data.size() - 1]));
+
+double VecArrayStat::get_mean() const {
+	return m_mean;
 };
 
-int VecArrayStat::get_min() const {
-	return sqrt(squar(data[0]));
+double VecArrayStat::get_rms() const {
+	return m_rms;
+};
+
+array <int, 3> VecArrayStat::get_max() const {
+	return data[data.size() - 1];
+};
+
+array <int, 3> VecArrayStat::get_min() const {
+	return data[0];
 };
 
 size_t VecArrayStat::countLarger(int a) const {
-	int count = 0;
+	size_t count = 0;
 	for (int i = 0; i < data.size(); i++) {
-		if (squar(data[i]) > a) {
+		if (squar(data[i]) > a*a) {
 			count += 1;
 		}
 	}
@@ -65,8 +74,8 @@ void VecArrayStat::print() const {
 	std::cout << "Input const a ";
 	double a;
 	std::cin >> a;
-	std::cout << "max =" << get_max() << "; min = " << get_min() << "; average value = " << m_mean << "; rms = "
-		<< m_rms << "; count value which is more a = " << countLarger(a) << ";\n";
+	std::cout << "average value = " << get_mean() << "; rms = "
+		<< get_rms() << "; count value which is more a = " << countLarger(a) << ";\n";
 	for (int i = 0; i < data.size(); i++) {
 		cout << data[i][0] << " " << data[i][1] << " " << data[i][2] << endl;
 	}

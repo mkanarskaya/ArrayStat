@@ -10,6 +10,8 @@ private:
 	double m_rms;
 public:
 	ArrayStat(const std::string& fname);
+	double get_mean() const;
+	double get_rms() const;
 	int get_max() const;
 	int get_min() const;
 	void print() const;
